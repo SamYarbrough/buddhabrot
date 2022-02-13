@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+#include <fstream> //file
 #include <math.h>
 #include <time.h>
 
@@ -20,6 +20,9 @@ float clamp(float w, float a, float b) {
 	return (w<a)?a:((w>b)?b:w);
 }
 
+
+//cardioid/period 3 bulb detection
+//reduces computation by ~25 times
 bool bulbdec(float x, float y) {
 	float a = 0.25;
 	float b = -0.25;
@@ -29,6 +32,7 @@ bool bulbdec(float x, float y) {
 	return (card || cir);
 }
 
+//mandelbrot
 bool m(float x, float y, float maxits) {
 	float r = x;
 	float i = y;
@@ -46,6 +50,7 @@ bool m(float x, float y, float maxits) {
 	return false;
 }
 
+//buddhabrot
 void mandelbrot(float px, float py, float z) {
 	float x = (px+randFloat()-.5)/z;
 	float y = (py+randFloat()-.5)/z;
@@ -101,6 +106,7 @@ int main ()
 	std::cout << "Passes: " << iters << "\n";
 	std::cout << "Total: " << iters*width*height << " samples\n\n";
 
+	//compute
 	for (float i = 0; i < iters; i++) {
 		for (float y = 0; y < height; y++) {
 			std::cerr << "\rRendering... " << (i*height+y)/(iters*height)*100 << "% " << std::flush;
